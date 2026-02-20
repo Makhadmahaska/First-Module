@@ -13,3 +13,8 @@ if (dateDiv) {
     const year = dateObj.getUTCFullYear();
     dateDiv.innerHTML = `${month} ${day}, ${year}`;
 }
+
+
+const weatherInfo = document.getElementById('weather-info');
+const searchInput = document.getElementById('search-bar-input');
+const searchBtn = document.getElementById('search-btn');
