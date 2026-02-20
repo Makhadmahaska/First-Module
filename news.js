@@ -10,3 +10,9 @@ function fetchNewsWithCallback(callback) {
     .then(data => callback(data))
     .catch(err => console.error("Error fetching news (callback):", err));
 }
+
+function fetchNewsWithPromise() {
+  return fetch(NEWS_URL)
+    .then(response => response.json())
+    .catch(err => console.error("Error fetching news (promise):", err));
+}
