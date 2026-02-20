@@ -102,3 +102,26 @@ function renderTasks(filter: "all" | "completed" | "pending" = "all") {
         taskList.appendChild(taskDiv);
     });
 }
+
+
+
+taskList.addEventListener("click", (e) => {
+    const target = e.target as HTMLElement;
+    const taskDiv = target.closest(".task-item") as HTMLElement;
+    if (!taskDiv) return;
+
+    const taskId = Number(taskDiv.dataset.id);
+
+    if (target.classList.contains("complete-btn")) toggleTaskCompletion(taskId);
+    if (target.classList.contains("delete-btn")) deleteTask(taskId);
+    if (target.classList.contains("edit-btn")) {
+        const task = tasks.find(t => t.id === taskId);
+        if (!task) return;
+
+        const newTitle = prompt("Edit title", task.title);
+        const newDesc = prompt("Edit description", task.description || "");
+        const newPriority = prompt("Edit priority (low, medium, high)", task.priority) as Priority;
+
+        if (newTitle && newPriority) editTask(taskId, newTitle, newDesc || "", newPriority);
+    }
+});
