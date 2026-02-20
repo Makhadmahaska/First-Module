@@ -27,3 +27,39 @@ async function fetchNewsAsync() {
     console.error("Error fetching news (async/await):", err);
   }
 }
+
+
+function displayNews(articles) {
+  const newsFeed = document.getElementById("news-feed");
+  newsFeed.innerHTML = ""; // Clear old content
+
+  if (!articles || articles.length === 0) {
+    newsFeed.textContent = "No news available.";
+    return;
+  }
+
+
+  const ul = document.createElement("ul");
+  ul.style.listStyle = "none";
+  ul.style.padding = "0";
+  
+
+  articles.slice(0, 5).forEach(article => {
+    const li = document.createElement("li");
+    li.style.marginBottom = "15px";
+    li.innerHTML = `
+      <strong>${article.title}</strong><br>
+      ${article.description || ""}<br>
+      <a href="${article.url}" target="_blank">Read more</a>
+    `;
+    ul.appendChild(li);
+  });
+
+  newsFeed.appendChild(ul);
+}
+
+// --- Example usage: pick one async pattern ---
+// Using async/await
+fetchNewsAsync().then(data => {
+  if (data && data.articles) displayNews(data.articles);
+});
