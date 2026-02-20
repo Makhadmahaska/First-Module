@@ -21,3 +21,7 @@ const taskDesc = document.getElementById("task-desc") as HTMLTextAreaElement;
 const taskPriority = document.getElementById("task-priority") as HTMLSelectElement;
 const taskList = document.getElementById("task-list") as HTMLDivElement;
 const taskFilters = document.getElementById("task-filters") as HTMLDivElement;
+
+
+
+let tasks: Task[] = [];
