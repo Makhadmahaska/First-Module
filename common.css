@@ -49,3 +49,44 @@ body {
     text-align: center;
     font-size: 1.5em;
 }
+
+
+/*
+weather styling
+*/
+
+.weather-input-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.weather-input-container input {
+    flex: 1;
+    padding: 6px;
+    border-radius: 6px;
+    border: 1px solid #dcdde1;
+    font-size: 0.9em;
+}
+
+.weather-input-container button {
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: none;
+    background-color: #192a56;
+    color: #fff;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+}
+
+.weather-input-container button:hover {
+    background-color: #40739e;
+}
+
+.weather-app #weather-info img {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 5px;
+}
