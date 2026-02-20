@@ -15,6 +15,9 @@ interface Task {
     category?: string;
 }
 
+// --------------------
+// DOM Elements
+// --------------------
 const taskForm = document.getElementById("task-form") as HTMLFormElement;
 const taskTitle = document.getElementById("task-title") as HTMLInputElement;
 const taskDesc = document.getElementById("task-desc") as HTMLTextAreaElement;
@@ -22,11 +25,12 @@ const taskPriority = document.getElementById("task-priority") as HTMLSelectEleme
 const taskList = document.getElementById("task-list") as HTMLDivElement;
 const taskFilters = document.getElementById("task-filters") as HTMLDivElement;
 
-
-
+// --------------------
+// App State
+// --------------------
 let tasks: Task[] = [];
 
-
+// Load tasks from localStorage
 function loadTasks() {
     const saved = localStorage.getItem("tasks");
     if (saved) {
@@ -34,12 +38,16 @@ function loadTasks() {
     }
 }
 
-
+// Save tasks to localStorage
 function saveTasks() {
     localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
+// --------------------
+// Task Operations
+// --------------------
 
+// Add new task
 function addTask(title: string, description: string, priority: Priority) {
     const newTask: Task = {
         id: Date.now(),
@@ -54,28 +62,30 @@ function addTask(title: string, description: string, priority: Priority) {
     renderTasks();
 }
 
-
+// Toggle completion
 function toggleTaskCompletion(id: number) {
     tasks = tasks.map(task => task.id === id ? { ...task, completed: !task.completed } : task);
     saveTasks();
     renderTasks();
 }
 
-
-
+// Delete task
 function deleteTask(id: number) {
     tasks = tasks.filter(task => task.id !== id);
     saveTasks();
     renderTasks();
 }
 
-
+// Edit task
 function editTask(id: number, title: string, description: string, priority: Priority) {
     tasks = tasks.map(task => task.id === id ? { ...task, title, description, priority } : task);
     saveTasks();
     renderTasks();
 }
 
+// --------------------
+// Render Tasks
+// --------------------
 function renderTasks(filter: "all" | "completed" | "pending" = "all") {
     taskList.innerHTML = "";
 
@@ -99,36 +109,28 @@ function renderTasks(filter: "all" | "completed" | "pending" = "all") {
                 <button class="delete-btn">Delete</button>
             </div>
         `;
+
+        // Event listeners for buttons
+        taskDiv.querySelector(".complete-btn")?.addEventListener("click", () => toggleTaskCompletion(task.id));
+        taskDiv.querySelector(".delete-btn")?.addEventListener("click", () => deleteTask(task.id));
+        taskDiv.querySelector(".edit-btn")?.addEventListener("click", () => {
+            const newTitle = prompt("Edit title", task.title);
+            const newDesc = prompt("Edit description", task.description || "");
+            const newPriority = prompt("Edit priority (low, medium, high)", task.priority) as Priority;
+            if (newTitle && newPriority) {
+                editTask(task.id, newTitle, newDesc || "", newPriority);
+            }
+        });
+
         taskList.appendChild(taskDiv);
     });
+
+    renderStats();
 }
 
-
-
-taskList.addEventListener("click", (e) => {
-    const target = e.target as HTMLElement;
-    const taskDiv = target.closest(".task-item") as HTMLElement;
-    if (!taskDiv) return;
-
-    const taskId = Number(taskDiv.dataset.id);
-
-    if (target.classList.contains("complete-btn")) toggleTaskCompletion(taskId);
-    if (target.classList.contains("delete-btn")) deleteTask(taskId);
-    if (target.classList.contains("edit-btn")) {
-        const task = tasks.find(t => t.id === taskId);
-        if (!task) return;
-
-        const newTitle = prompt("Edit title", task.title);
-        const newDesc = prompt("Edit description", task.description || "");
-        const newPriority = prompt("Edit priority (low, medium, high)", task.priority) as Priority;
-
-        if (newTitle && newPriority) editTask(taskId, newTitle, newDesc || "", newPriority);
-    }
-});
-
-
-
-
+// --------------------
+// Task Statistics
+// --------------------
 function renderStats() {
     const total = tasks.length;
     const completed = tasks.reduce((acc, t) => t.completed ? acc + 1 : acc, 0);
@@ -140,16 +142,14 @@ function renderStats() {
     }
 }
 
-
-
-
+// --------------------
+// Event Listeners
+// --------------------
 taskForm.addEventListener("submit", e => {
     e.preventDefault();
     addTask(taskTitle.value, taskDesc.value, taskPriority.value as Priority);
     taskForm.reset();
 });
-
-
 
 taskFilters.addEventListener("click", e => {
     const target = e.target as HTMLElement;
@@ -159,6 +159,8 @@ taskFilters.addEventListener("click", e => {
     }
 });
 
-// Initialize app
+// --------------------
+// Initialize App
+// --------------------
 loadTasks();
 renderTasks();
