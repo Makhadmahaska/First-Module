@@ -16,3 +16,14 @@ function fetchNewsWithPromise() {
     .then(response => response.json())
     .catch(err => console.error("Error fetching news (promise):", err));
 }
+
+
+async function fetchNewsAsync() {
+  try {
+    const response = await fetch(NEWS_URL);
+    const data = await response.json();
+    return data;
+  } catch (err) {
+    console.error("Error fetching news (async/await):", err);
+  }
+}
