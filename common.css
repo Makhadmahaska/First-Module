@@ -1,3 +1,6 @@
+/* -------------------------------
+   General Reset
+---------------------------------*/
 * {
     box-sizing: border-box;
     margin: 0;
@@ -11,10 +14,9 @@ body {
     line-height: 1.6;
 }
 
-/* 
+/* -------------------------------
    Dashboard Container
-*/
-
+---------------------------------*/
 .dashboard-container {
     display: flex;
     flex-wrap: wrap;
@@ -23,8 +25,7 @@ body {
     justify-content: center;
 }
 
-
-/* 
+/* -------------------------------
    Dashboard Boxes / Cards
 */
 .dashboard-box {
@@ -50,13 +51,84 @@ body {
     font-size: 1.5em;
 }
 
+/* -------------------------------
+   Task Manager Form
+---------------------------------*/
+.task-manager form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 10px;
+}
 
-/*
-weather styling
-*/
+.task-manager input,
+.task-manager textarea,
+.task-manager select {
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #dcdde1;
+    font-size: 0.9em;
+}
 
+.task-manager button {
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    background-color: #273c75;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.task-manager button:hover {
+    background-color: #40739e;
+}
+
+/* -------------------------------
+   Task List
+---------------------------------*/
+#task-list {
+    flex-grow: 1;
+    overflow-y: auto;
+    max-height: 200px;
+}
+
+/* Task Item Priority Colors */
+.task-item {
+    padding: 8px;
+    border-radius: 6px;
+    margin-bottom: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-left: 5px solid #40739e;
+    background-color: #f5f6fa;
+}
+
+.task-item.low {
+    border-left-color: #44bd32; /* green */
+}
+
+.task-item.medium {
+    border-left-color: #fbc531; /* yellow */
+}
+
+.task-item.high {
+    border-left-color: #e84118; /* red */
+}
+
+.task-item.completed {
+    text-decoration: line-through;
+    opacity: 0.7;
+}
+
+/* -------------------------------
+   Weather Box
+---------------------------------*/
 .weather-input-container {
     display: flex;
+    background-color: #192a56;
     justify-content: center;
     gap: 10px;
     margin-bottom: 10px;
@@ -90,8 +162,9 @@ weather styling
     height: 80px;
     margin-bottom: 5px;
 }
-/* style the news css */
 
+/* -------------------------------
+   News Box
 ---------------------------------*/
 .news-app #news-feed {
     flex-grow: 1;
@@ -107,7 +180,6 @@ weather styling
 .news-item:last-child {
     border-bottom: none;
 }
-
 
 
 @media (max-width: 1000px) {
