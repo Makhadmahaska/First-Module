@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Dashboard</title>
+    <link rel="stylesheet" href="common.css">
+</head>
+<body>
+    <header class="dashboard-header">
+        <h1>Mini Dashboard</h1>
+        <div id="current-date"></div>
+    </header>
+
+    <main class="dashboard-container">
+
+        <!-- Task Manager Box -->
+        <section class="dashboard-box task-manager">
+            <h2>Task Manager</h2>
+            <form id="task-form">
+                <input type="text" id="task-title" placeholder="Task title" required>
+                <textarea id="task-desc" placeholder="Task description"></textarea>
+                <select id="task-priority">
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                </select>
+                <button type="submit">Add Task</button>
+            </form>
+            <div id="task-filters">
+                <button data-filter="all">All</button>
+                <button data-filter="completed">Completed</button>
+                <button data-filter="pending">Pending</button>
+            </div>
+            <div id="task-list"></div>
+        </section>
+
+        <!-- Weather Box -->
+        <section class="dashboard-box weather-app">
+    <h2>Weather</h2>
+    <div class="weather-input-container">
+        <input type="text" id="search-bar-input" placeholder="Enter a city " />
+        <button id="search-btn">Search</button>
+    </div>
+    <div id="weather-info">Search a city to see weather</div>
+</section>
+
+        <!-- News Box -->
+        <section class="dashboard-box news-app">
+            <h2>News</h2>
+            <div id="news-feed">Loading news...</div>
+        </section>
+
+    </main>
+
+
+    <script src="weather.js"></script>
+    <script src="task.js"></script>
+    <script src="news.js"></script>
+</body>
+</html>
