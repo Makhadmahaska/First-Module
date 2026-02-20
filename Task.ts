@@ -76,3 +76,29 @@ function editTask(id: number, title: string, description: string, priority: Prio
     renderTasks();
 }
 
+function renderTasks(filter: "all" | "completed" | "pending" = "all") {
+    taskList.innerHTML = "";
+
+    const filteredTasks = tasks.filter(task => {
+        if (filter === "all") return true;
+        if (filter === "completed") return task.completed;
+        if (filter === "pending") return !task.completed;
+        return true;
+    });
+
+    filteredTasks.forEach(task => {
+        const taskDiv = document.createElement("div");
+        taskDiv.className = `task-item ${task.completed ? "completed" : ""}`;
+        taskDiv.innerHTML = `
+            <h3>${task.title} <span class="priority">${task.priority}</span></h3>
+            <p>${task.description || ""}</p>
+            <small>${task.createdAt.toLocaleString()}</small>
+            <div class="task-actions">
+                <button class="complete-btn">${task.completed ? "Undo" : "Complete"}</button>
+                <button class="edit-btn">Edit</button>
+                <button class="delete-btn">Delete</button>
+            </div>
+        `;
+        taskList.appendChild(taskDiv);
+    });
+}
