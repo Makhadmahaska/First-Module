@@ -90,3 +90,20 @@ weather styling
     height: 80px;
     margin-bottom: 5px;
 }
+/* style the news css */
+
+---------------------------------*/
+.news-app #news-feed {
+    flex-grow: 1;
+    overflow-y: auto;
+    max-height: 220px;
+}
+
+.news-item {
+    padding: 8px;
+    border-bottom: 1px solid #dcdde1;
+}
+
+.news-item:last-child {
+    border-bottom: none;
+}
