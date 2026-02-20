@@ -139,3 +139,26 @@ function renderStats() {
         statsDiv.innerHTML = `Total: ${total} | Completed: ${completed} | Pending: ${pending}`;
     }
 }
+
+
+
+
+taskForm.addEventListener("submit", e => {
+    e.preventDefault();
+    addTask(taskTitle.value, taskDesc.value, taskPriority.value as Priority);
+    taskForm.reset();
+});
+
+
+
+taskFilters.addEventListener("click", e => {
+    const target = e.target as HTMLElement;
+    if (target.tagName === "BUTTON") {
+        const filter = target.dataset.filter as "all" | "completed" | "pending";
+        renderTasks(filter);
+    }
+});
+
+// Initialize app
+loadTasks();
+renderTasks();
