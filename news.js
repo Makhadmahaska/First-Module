@@ -42,7 +42,7 @@ function displayNews(articles) {
   const ul = document.createElement("ul");
   ul.style.listStyle = "none";
   ul.style.padding = "0";
-  
+
 
   articles.slice(0, 5).forEach(article => {
     const li = document.createElement("li");
@@ -58,8 +58,7 @@ function displayNews(articles) {
   newsFeed.appendChild(ul);
 }
 
-// --- Example usage: pick one async pattern ---
-// Using async/await
+
 fetchNewsAsync().then(data => {
   if (data && data.articles) displayNews(data.articles);
 });
