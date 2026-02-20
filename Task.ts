@@ -25,3 +25,11 @@ const taskFilters = document.getElementById("task-filters") as HTMLDivElement;
 
 
 let tasks: Task[] = [];
+
+
+function loadTasks() {
+    const saved = localStorage.getItem("tasks");
+    if (saved) {
+        tasks = JSON.parse(saved).map((t: any) => ({ ...t, createdAt: new Date(t.createdAt) }));
+    }
+}
