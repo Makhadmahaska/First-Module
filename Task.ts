@@ -125,3 +125,17 @@ taskList.addEventListener("click", (e) => {
         if (newTitle && newPriority) editTask(taskId, newTitle, newDesc || "", newPriority);
     }
 });
+
+
+
+
+function renderStats() {
+    const total = tasks.length;
+    const completed = tasks.reduce((acc, t) => t.completed ? acc + 1 : acc, 0);
+    const pending = total - completed;
+
+    const statsDiv = document.getElementById("task-stats");
+    if (statsDiv) {
+        statsDiv.innerHTML = `Total: ${total} | Completed: ${completed} | Pending: ${pending}`;
+    }
+}
