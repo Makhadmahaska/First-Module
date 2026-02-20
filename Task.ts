@@ -40,3 +40,23 @@ function saveTasks() {
 }
 
 
+function addTask(title: string, description: string, priority: Priority) {
+    const newTask: Task = {
+        id: Date.now(),
+        title,
+        description,
+        completed: false,
+        priority,
+        createdAt: new Date(),
+    };
+    tasks.push(newTask);
+    saveTasks();
+    renderTasks();
+}
+
+
+function toggleTaskCompletion(id: number) {
+    tasks = tasks.map(task => task.id === id ? { ...task, completed: !task.completed } : task);
+    saveTasks();
+    renderTasks();
+}
