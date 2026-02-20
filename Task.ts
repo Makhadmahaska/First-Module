@@ -60,3 +60,19 @@ function toggleTaskCompletion(id: number) {
     saveTasks();
     renderTasks();
 }
+
+
+
+function deleteTask(id: number) {
+    tasks = tasks.filter(task => task.id !== id);
+    saveTasks();
+    renderTasks();
+}
+
+
+function editTask(id: number, title: string, description: string, priority: Priority) {
+    tasks = tasks.map(task => task.id === id ? { ...task, title, description, priority } : task);
+    saveTasks();
+    renderTasks();
+}
+
