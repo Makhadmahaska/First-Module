@@ -55,3 +55,28 @@ function displayWeather(data) {
         <p>Humidity: ${main.humidity}%</p>
     `;
 }
+
+
+// -----------------------------
+// Event Listeners
+// -----------------------------
+
+// Enter key press in input
+if (searchInput) {
+    searchInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            const city = searchInput.value.trim();
+            if (city) getWeather(city);
+            searchInput.value = '';
+        }
+    });
+}
+
+// Search button click
+if (searchBtn) {
+    searchBtn.addEventListener('click', () => {
+        const city = searchInput.value.trim();
+        if (city) getWeather(city);
+        searchInput.value = '';
+    });
+}
