@@ -33,3 +33,8 @@ function loadTasks() {
         tasks = JSON.parse(saved).map((t: any) => ({ ...t, createdAt: new Date(t.createdAt) }));
     }
 }
+
+
+function saveTasks() {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+}
