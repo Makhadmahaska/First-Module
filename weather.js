@@ -1,5 +1,15 @@
-
+// 
 const monthNames = [
-    "January", "February", "March", "April", "May", "June",
+    "January", "February", "March", "April", "May", "June",   // i use an array to store all months
     "July", "August", "September", "October", "November", "December"
 ];
+
+
+const dateDiv = document.getElementById('date');
+if (dateDiv) {
+    const dateObj = new Date();
+    const month = monthNames[dateObj.getUTCMonth()];
+    const day = dateObj.getUTCDate();
+    const year = dateObj.getUTCFullYear();
+    dateDiv.innerHTML = `${month} ${day}, ${year}`;
+}
