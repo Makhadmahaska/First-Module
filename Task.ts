@@ -142,9 +142,6 @@ function renderStats() {
     }
 }
 
-// --------------------
-// Event Listeners
-// --------------------
 taskForm.addEventListener("submit", e => {
     e.preventDefault();
     addTask(taskTitle.value, taskDesc.value, taskPriority.value as Priority);
